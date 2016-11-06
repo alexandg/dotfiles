@@ -1,0 +1,10 @@
+format_strings = false
+reorder_imports = true
+single_line_if_else = true
+wrap_comments = true
+match_block_trailing_comma = true
+max_width = 100
+ideal_width = 80
+fn_args_density = "Compressed"
+fn_call_width = 80
+fn_args_paren_newline = false
