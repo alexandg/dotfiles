@@ -1,0 +1,7 @@
+[alias]
+    lg = log --oneline --abbrev-commit --all --graph --decorate --color --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+[user]  
+	name = Geoff Alexander
+	email = geoff.i.alexander@gmail.com
+[core]
+	editor = vim
