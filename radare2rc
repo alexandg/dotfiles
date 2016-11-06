@@ -1,0 +1,18 @@
+# Comments shown to right of disasm if possible
+e asm.cmtright=false
+
+# Show pseudo-code in disasm
+e asm.pseudo=false
+
+# Show stack and register values if debugging
+e cmd.stack=true
+
+# Use UTF-8 to get cool arrows
+e scr.utf8=true
+
+# Demangle symbols
+e bin.demangle = true
+e asm.demangle = true
+
+# Don't start debugger in the loader, instead start at entry
+e dbg.bep = entry
