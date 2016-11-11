@@ -1,4 +1,3 @@
-
 # Use Intel syntax
 set disassembly-flavor intel
 
@@ -7,3 +6,6 @@ set history save on
 set history filename ~/.gdb_history
 set history size 32768
 set history expansion on
+
+# PEDA
+source ~/src/peda/peda.py
