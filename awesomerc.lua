@@ -107,7 +107,8 @@ editor_cmd = terminal .. " -e " .. editor
 awful.util.spawn_with_shell("xcompmgr &")
 
 -- Themes define colours, icons, font and wallpapers.
-beautiful.init(home_dir .. "/.config/awesome/themes/zen-nokto/theme.lua")
+--beautiful.init(home_dir .. "/.config/awesome/themes/zen-nokto/theme.lua")
+beautiful.init(home_dir .. "/.config/awesome/themes/awesome-solarized/dark/theme.lua")
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
