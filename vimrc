@@ -81,7 +81,7 @@ let NERDTreeQuitOnOpen=1
 nmap <leader>b  :BufExplorer<CR>
 nmap <leader>l  :bnext<CR>
 nmap <leader>h  :bprevious<CR>
-nmap <leader>f  :buffer 
+nmap <leader>f  :buffer
 nmap <leader>bq :bp <BAR> bd #<CR>
 nmap <leader>p  :b#<CR>
 " Basic window splitting
@@ -92,7 +92,7 @@ source $VIMRUNTIME/ftplugin/man.vim
 autocmd FileType man,help wincmd L
 nmap K :Man <cword><CR>
 " Pydoc plugin
-let g:pydoc_open_cmd = 'vsplit' 
+let g:pydoc_open_cmd = 'vsplit'
 autocmd BufRead,BufNewFile __doc__ wincmd L
 " Turn off LaTeX conceal for things
 set cole=2
@@ -114,3 +114,5 @@ let $RUST_SRC_PATH = $HOME . "/src/rust/src/"
 autocmd BufRead,BufNewFile Cargo.toml,Cargo.lock,*.rs compiler cargo
 " Config autopep8
 let g:autopep8_disable_show_diff=1
+" jedi python autocomplete only when asked not by default
+let g:jedi#popup_on_dot=0
