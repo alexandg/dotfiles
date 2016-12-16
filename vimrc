@@ -116,3 +116,4 @@ autocmd BufRead,BufNewFile Cargo.toml,Cargo.lock,*.rs compiler cargo
 let g:autopep8_disable_show_diff=1
 " jedi python autocomplete only when asked not by default
 let g:jedi#popup_on_dot=0
+let g:jedi#usages_command=""
