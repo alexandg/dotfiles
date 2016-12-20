@@ -1,6 +1,7 @@
 set nocompatible
 syntax on
 call pathogen#infect()
+set shell=/bin/zsh
 filetype plugin on
 set ofu=syntaxcomplete#Complete
 set number
