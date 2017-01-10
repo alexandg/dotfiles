@@ -10,7 +10,7 @@ nnoremap <F9> :setlocal spell! spelllang=en_us<CR>
 filetype plugin indent on
 set t_Co=256
 set background=dark
-colorscheme solarized
+colorscheme apprentice
 set cc=80
 set expandtab
 set tabstop=4
