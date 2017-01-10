@@ -85,4 +85,14 @@ zle -N zle-line-init
 PROMPT='${vim_mode} %n@%m %~ %# '
 RPROMPT='$(git_prompt)'
 
+if [ $TERM = "xterm" ] ; then
+    if [ -n $COLORTERM ] ; then
+        if [ $COLORTERM = "xfce-terminal" ] ; then
+            TERM=xterm-256color
+        fi
+    elif [ -n "$VTE_VERSION" ] ; then
+        TERM=xterm-256color
+    fi
+fi
+
 source $HOME/.zsh_aliases
