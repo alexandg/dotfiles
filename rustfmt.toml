@@ -8,3 +8,4 @@ ideal_width = 80
 fn_args_density = "Compressed"
 fn_call_width = 80
 fn_args_paren_newline = false
+struct_trailing_comma = "Always"
