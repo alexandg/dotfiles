@@ -102,7 +102,7 @@ mymainmenu = awful.menu({ items = {
     { "Awesome", myawesomemenu, beautiful.awesome_icon },
     { "Debian", debian.menu.Debian_menu.Debian },
     { "Open Terminal", terminal },
-    { "Lock Screen", function () awful.utils.spawn("xscreensave-command -lock") end },
+    { "Lock Screen", function () awful.spawn("xscreensaver-command -lock") end },
     { "Suspend", "systemctl suspend" },
     { "Reboot", "systemctl reboot" },
     { "Shutdown", "systemctl poweroff" }
