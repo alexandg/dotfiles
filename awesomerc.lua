@@ -186,7 +186,7 @@ function vertical_tasklist(w, buttons, label, data, objects)
         if icon then
             ib:set_image(icon)
         else
-            ib:set_image(beautiful.generic_icon)
+            ib:set_image(beautiful.awesome_icon)
         end
 
         bgb.shape              = args.shape
@@ -219,7 +219,7 @@ function vertical_taglist(w, buttons, label, data, objects)
             ah = wibox.layout.align.horizontal()
             ah:set_middle(tb)
             bgt:set_widget(ah)
-            ms = wibox.container.margin(bgt, 0, 2, 0, 0)
+            ms = wibox.container.margin(bgt, 2, 0, 0, 0)
             m = wibox.container.margin(ms, 0, 0, 2, 2)
             bgb:set_bg(beautiful.border_normal)
             bgb:set_widget(m)
@@ -234,10 +234,14 @@ function vertical_taglist(w, buttons, label, data, objects)
             }
         end
         local text, bg, bg_image, icon = label(o)
+        local num_clients = 0
+        for k, v in pairs(o:clients()) do
+            num_clients = num_clients + 1
+        end
         tb:set_markup(text)
         tb:set_align("center")
         bgt:set_bg(bg)
-        if bg == beautiful.taglist_bg_focus then
+        if num_clients == 0 then
             ms:set_color(beautiful.fg_focus)
         else
             ms:set_color(beautiful.border_focus)
@@ -459,9 +463,13 @@ globalkeys = awful.util.table.join(
                          "/bin/tmux_dropdown.sh")
     end,
     {description = "", group = "awesome"}),
-    awful.key({ modkey }, "XF86AudioRaiseVolume", function() menubar.show() end,
+    awful.key({ }, "XF86AudioRaiseVolume", function ()
+        awful.spawn("amixer -q set Master 5%+ unmute")
+    end,
     {description = "Raise Volume", group = "awesome"}),
-    awful.key({ modkey }, "XF86AudioLowerVolume", function() menubar.show() end,
+    awful.key({ }, "XF86AudioLowerVolume", function()
+        awful.spawn("amixer -q set Master 5%- unmute")
+    end,
     {description = "Lower Volume", group = "awesome"})
 )
 
@@ -477,8 +485,8 @@ clientkeys = awful.util.table.join(
     {description = "toggle floating", group = "client"}),
     awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end,
     {description = "move to master", group = "client"}),
-    awful.key({ modkey,           }, "o", function (c) c:move_to_screen() end,
-    {description = "move to screen", group = "client"}),
+    --awful.key({ modkey,           }, "o", function (c) c:move_to_screen() end,
+    --{description = "move to screen", group = "client"}),
     awful.key({ modkey,           }, "t", function (c) c.ontop = not c.ontop end,
     {description = "toggle keep on top", group = "client"}),
     awful.key({ modkey,           }, "n", function (c)
@@ -494,9 +502,9 @@ clientkeys = awful.util.table.join(
     {description = "maximize", group = "client"}),
 
     -- Custom client keys
-    awful.key({ modkey,           }, "o", function (c) c:move_to_screen(c.screen-1) end,
+    awful.key({ modkey,           }, "o", function (c) c:move_to_screen(c.screen.index - 1) end,
     {description = "move to previous screen", group = "client"}),
-    awful.key({ modkey,           }, "p", function (c) c:move_to_screen(c.screen+1) end,
+    awful.key({ modkey,           }, "p", function (c) c:move_to_screen(c.screen.index + 1) end,
     {description = "move to next screen", group = "client"})
 )
 
@@ -616,6 +624,7 @@ awful.rules.rules = {
         properties = { titlebars_enabled = true }
     },
     -- Custom Program Tag rules
+    { rule = { class = "conky", "Conky" }, properties = { screen = 1 } },
     { rule = { class = "Icedove" }, properties = { screen = 1, tag = "E" } },
     { rule = { class = "Pithos" }, properties = { screen = 1, tag = "M" } },
     { rule = { class = "Quodlibet" }, properties = { screen = 1, tag = "M" } },
@@ -734,10 +743,10 @@ run_once("thunar", "--daemon")
 run_once("kupfer", "--no-splash")
 run_once("icedove")
 run_once("volumeicon")
-run_once("xbacklight", "-set 20");
-run_once(home_dir .. "/bin/update_vim_plugins.sh")
-run_once("conky", "-c " .. home_dir .. "/.conkyrc.lua")
-run_once("conky", "-c " .. home_dir .. "/.conkyrc2.lua")
-run_once(home_dir .. "/bin/tmux_sessions.sh")
-run_once("xmodmap", home_dir .. "/.xmodmaprc")
+awful.spawn.with_shell("xbacklight -set 20");
+awful.spawn.with_shell(home_dir .. "/bin/update_vim_plugins.sh")
+awful.spawn("conky -c " .. home_dir .. "/.conkyrc.lua")
+awful.spawn("conky -c " .. home_dir .. "/.conkyrc2.lua")
+awful.spawn.with_shell(home_dir .. "/bin/tmux_sessions.sh")
+awful.spawn.with_shell("xmodmap " .. home_dir .. "/.xmodmaprc")
 -- }}}
