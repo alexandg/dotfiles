@@ -365,9 +365,9 @@ root.buttons(awful.util.table.join(
     awful.button({ }, 4, awful.tag.viewnext),
     awful.button({ }, 5, awful.tag.viewprev)
 ))
-    -- }}}
+-- }}}
 
-    -- {{{ Key bindings
+-- {{{ Key bindings
 globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "s", hotkeys_popup.show_help,
     {description="show help", group="awesome"}),
@@ -464,11 +464,11 @@ globalkeys = awful.util.table.join(
     end,
     {description = "", group = "awesome"}),
     awful.key({ }, "XF86AudioRaiseVolume", function ()
-        awful.spawn("amixer -q set Master 5%+ unmute")
+        awful.spawn("pactl set-sink-volume @DEFAULT_SINK@ +5%")
     end,
     {description = "Raise Volume", group = "awesome"}),
     awful.key({ }, "XF86AudioLowerVolume", function()
-        awful.spawn("amixer -q set Master 5%- unmute")
+        awful.spawn("pactl set-sink-volume @DEFAULT_SINK@ -5%")
     end,
     {description = "Lower Volume", group = "awesome"})
 )
@@ -599,7 +599,7 @@ awful.rules.rules = {
                 "MessageWin",  -- kalarm.
                 "Sxiv",
                 "Wpa_gui",
-                "pinentry",
+                --"pinentry",
                 "veromix",
                 "xtightvncviewer",
                 -- More floating windows
@@ -618,8 +618,9 @@ awful.rules.rules = {
     },
     {
         rule_any = {
-            -- Only give titlebars to dialog boxes
-            type = { "dialog" }
+            type = { "dialog" },
+            class = { "pinentry", "gcr-prompter" },
+            name = { "pinentry-gnome3" }
         },
         properties = { titlebars_enabled = true }
     },
@@ -628,6 +629,7 @@ awful.rules.rules = {
     { rule = { class = "Icedove" }, properties = { screen = 1, tag = "E" } },
     { rule = { class = "Pithos" }, properties = { screen = 1, tag = "M" } },
     { rule = { class = "Quodlibet" }, properties = { screen = 1, tag = "M" } },
+    { rule = { class = "Kupfer" }, properties = { border_width = 0 } }
 }
 -- }}}
 
@@ -742,11 +744,11 @@ run_once("nm-applet")
 run_once("thunar", "--daemon")
 run_once("kupfer", "--no-splash")
 run_once("icedove")
-run_once("volumeicon")
+run_once("pasystray")
 awful.spawn.with_shell("xbacklight -set 20");
 awful.spawn.with_shell(home_dir .. "/bin/update_vim_plugins.sh")
 awful.spawn("conky -c " .. home_dir .. "/.conkyrc.lua")
 awful.spawn("conky -c " .. home_dir .. "/.conkyrc2.lua")
 awful.spawn.with_shell(home_dir .. "/bin/tmux_sessions.sh")
 awful.spawn.with_shell("xmodmap " .. home_dir .. "/.xmodmaprc")
--- }}}
+---- }}}
