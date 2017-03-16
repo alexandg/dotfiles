@@ -52,6 +52,7 @@ set statusline+=%=      "left/right separator
 set statusline+=%c,     "cursor column
 set statusline+=%l/%L   "cursor line/total lines
 set statusline+=\ %P    "percent through file
+set statusline+=\ [%{ALEGetStatusLine()}] " ALE status line
 set statusline+=\ %{fugitive#statusline()} "Git info from Fugitive
 " Close Omnicomplete window on select
 autocmd cursorMovedI * if pumvisible() == 0|pclose|endif
@@ -101,16 +102,8 @@ let g:tex_conceal=""
 " Trailing Whitespace highlight and removal
 match ErrorMsg '\s\+$'
 nnoremap <Leader>rtw :%s/\s\+$//e<CR>
-" Syntastic stuff
-let g:syntastic_c_compiler = 'gcc'
-let g:syntastic_c_compiler_options = ' -std=c11'
-let g:syntastic_cpp_compiler = 'g++'
-let g:syntastic_cpp_compiler_options = ' -std=c++11'
 " Racer
-let g:racer_cmd = $HOME . "/src/racer/target/release/racer"
 let $RUST_SRC_PATH = $HOME . "/src/rust/src/"
-" Set cc based on file type
-"autocmd FileType rust setlocal cc=100
 " Set up rust files to use cargo to make/build
 autocmd BufRead,BufNewFile Cargo.toml,Cargo.lock,*.rs compiler cargo
 " Config autopep8
@@ -118,3 +111,10 @@ let g:autopep8_disable_show_diff=1
 " jedi python autocomplete only when asked not by default
 let g:jedi#popup_on_dot=0
 let g:jedi#usages_command=""
+" ale error navigation commands
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
+let g:ale_echo_msg_format = '[%linter%] %severity% %s'
+let g:ale_linters = {
+\    'rust': ['cargo'],
+\}
