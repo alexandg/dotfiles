@@ -18,6 +18,8 @@ set shiftwidth=4
 set softtabstop=4
 set hidden
 set encoding=utf-8
+set conceallevel=0
+setlocal conceallevel=0
 " Remap <Leader> to Space
 let mapleader=" "
 " Disable arrow keys
@@ -118,3 +120,19 @@ let g:ale_echo_msg_format = '[%linter%] %severity% %s'
 let g:ale_linters = {
 \    'rust': ['cargo'],
 \}
+let g:indentLine_conceallevel=0
+" Tagbar support for Markdown
+let g:tagbar_type_markdown = {
+    \ 'ctagstype': 'markdown',
+    \ 'ctagsbin' : $HOME . '/src/markdown2ctags/markdown2ctags.py',
+    \ 'ctagsargs' : '-f - --sort=yes',
+    \ 'kinds' : [
+        \ 's:sections',
+        \ 'i:images'
+    \ ],
+    \ 'sro' : '|',
+    \ 'kind2scope' : {
+        \ 's' : 'section',
+    \ },
+    \ 'sort': 0,
+\ }
