@@ -627,6 +627,7 @@ awful.rules.rules = {
     -- Custom Program Tag rules
     { rule = { class = "conky", "Conky" }, properties = { screen = 1 } },
     { rule = { class = "Icedove" }, properties = { screen = 1, tag = "E" } },
+    { rule = { class = "Thunderbird" }, properties = { screen = 1, tag = "E" } },
     { rule = { class = "Pithos" }, properties = { screen = 1, tag = "M" } },
     { rule = { class = "Quodlibet" }, properties = { screen = 1, tag = "M" } },
     { rule = { class = "Kupfer" }, properties = { border_width = 0 } }
@@ -743,7 +744,7 @@ run_once("xscreensaver", "-no-splash")
 run_once("nm-applet")
 run_once("thunar", "--daemon")
 run_once("kupfer", "--no-splash")
-run_once("icedove")
+run_once("thunderbird")
 run_once("pasystray")
 awful.spawn.with_shell("xbacklight -set 20");
 awful.spawn.with_shell(home_dir .. "/bin/update_vim_plugins.sh")
