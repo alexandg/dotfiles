@@ -53,6 +53,7 @@ export PATH
 export ZLE_REMOVE_SUFFIX_CHARS=""
 export RUST_SRC_PATH="$HOME/src/rust/src/"
 export GTK_OVERLAY_SCROLLING=0
+export PYTHONPATH=${PYTHONPATH}:$HOME/src/androguard/
 
 git_prompt() {
     r_prompt=''
