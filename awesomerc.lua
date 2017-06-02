@@ -704,7 +704,7 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 -- }}}
 
 -- {{{ Notification settings
-naughty.config.defaults.position = "top_right"
+naughty.config.defaults.position = "bottom_right"
 naughty.config.defaults.border_width = 1
 
 -- Display Notifications on all screen when using multiple monitors
