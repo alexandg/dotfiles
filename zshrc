@@ -45,8 +45,6 @@ export LANGUAGE="en_US.UTF-8"
 export LD_LIBRARY_PATH="$HOME/bin/rust/lib"
 
 path+=("$HOME/bin")
-path+=("$HOME/bin/rust/bin")
-path+=("$HOME/bin/cargo/bin")
 path+=("$HOME/.cargo/bin")
 
 export PATH
