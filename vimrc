@@ -85,7 +85,7 @@ let NERDTreeQuitOnOpen=1
 nmap <leader>b  :BufExplorer<CR>
 nmap <leader>l  :bnext<CR>
 nmap <leader>h  :bprevious<CR>
-nmap <leader>f  :buffer
+nmap <leader>f  :buffer<SPACE>
 nmap <leader>bq :bp <BAR> bd #<CR>
 nmap <leader>p  :b#<CR>
 " Basic window splitting
@@ -112,11 +112,13 @@ autocmd BufRead,BufNewFile Cargo.toml,Cargo.lock,*.rs compiler cargo
 let g:autopep8_disable_show_diff=1
 " jedi python autocomplete only when asked not by default
 let g:jedi#popup_on_dot=0
+let g:jedi#show_call_signatures="2"
 let g:jedi#usages_command=""
 " ale error navigation commands
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
 let g:ale_echo_msg_format = '[%linter%] %severity% %s'
+let g:ale_rust_cargo_use_check=1
 let g:ale_linters = {
 \    'rust': ['cargo'],
 \}
