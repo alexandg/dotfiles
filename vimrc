@@ -42,20 +42,43 @@ map <F6> <Plug>HexManager
 " Paste Auto-Indent Toggle
 set pastetoggle=<F5>
 " Statusline
+function! GitStatus()
+    let l:fugitive = fugitive#statusline()
+    let l:fugitive = substitute(l:fugitive, '\[', '', 'g')
+    let l:fugitive = substitute(l:fugitive, '\]', '', 'g')
+    return strlen(l:fugitive) > 0?'  > '.l:fugitive.'':''
+endfunction
+function! AleStatus()
+    let l:alestatus = ale#statusline#Status()
+    return l:alestatus ==? "OK" ? '' : ' < '.l:alestatus
+endfunction
+set noshowmode
 set laststatus=2
-set statusline=%-.100F
-set statusline+=\ [%{strlen(&fenc)?&fenc:'none'}, "file encoding
-set statusline+=%{&ff}]  "file format
-set statusline+=\ %h      "help file flag
-set statusline+=%m      "modified flag
-set statusline+=%r      "read only flag
-set statusline+=%y      "filetype
-set statusline+=%=      "left/right separator
-set statusline+=%c,     "cursor column
-set statusline+=%l/%L   "cursor line/total lines
-set statusline+=\ %P    "percent through file
-set statusline+=\ [%{ALEGetStatusLine()}] " ALE status line
-set statusline+=\ %{fugitive#statusline()} "Git info from Fugitive
+set statusline=
+set statusline+=%#LineNr#
+" Mode
+set statusline+=\ %{toupper(mode())}
+" Git status
+set statusline+=%{GitStatus()}
+" Filename
+set statusline+=\ \>\ %-.80f
+" Modified/Readonly
+set statusline+=%{&modified?'\ +':''}
+set statusline+=%{&readonly?'\ RO':''}
+set statusline+=\ \>
+" left/right separator
+set statusline+=%=
+" Modified/Readonly
+" Filetype
+set statusline+=\ \<\ %{&filetype}
+" File encoding
+set statusline+=\ \<\ %{&fileencoding}
+" Cursor line and column
+set statusline+=\ \<\ %c:%l\ (%p%%)
+" ALE status
+"set statusline+=\ \<\ %{ALEGetStatusLine()}
+set statusline+=%{AleStatus()}
+set statusline+=\  " Padding
 " Close Omnicomplete window on select
 autocmd cursorMovedI * if pumvisible() == 0|pclose|endif
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif
@@ -81,13 +104,11 @@ let g:SuperTabDefaultCompletionType="context"
 " NERDTree
 map <leader>n :NERDTreeToggle<CR>
 let NERDTreeQuitOnOpen=1
-" BufExplorer
-nmap <leader>b  :BufExplorer<CR>
+" Buffer Management
 nmap <leader>l  :bnext<CR>
 nmap <leader>h  :bprevious<CR>
 nmap <leader>f  :buffer<SPACE>
 nmap <leader>bq :bp <BAR> bd #<CR>
-nmap <leader>p  :b#<CR>
 " Basic window splitting
 nmap <leader><BAR> :vsplit<CR>
 nmap <leader>- :split<CR>
