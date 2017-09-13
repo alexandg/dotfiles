@@ -351,9 +351,9 @@ awful.screen.connect_for_each_screen(function(s)
         {
             layout = wibox.layout.fixed.vertical,
             systray,
-            s.mylayoutbox,
             clock_hours_widget,
             clock_minutes_widget,
+            s.mylayoutbox,
         },
     }
 end)
