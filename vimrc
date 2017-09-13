@@ -46,22 +46,19 @@ function! GitStatus()
     let l:fugitive = fugitive#statusline()
     let l:fugitive = substitute(l:fugitive, '\[', '', 'g')
     let l:fugitive = substitute(l:fugitive, '\]', '', 'g')
-    return strlen(l:fugitive) > 0?'  > '.l:fugitive.'':''
+    return strlen(l:fugitive) > 0 ? ' > '.l:fugitive : ''
 endfunction
 function! AleStatus()
     let l:alestatus = ale#statusline#Status()
     return l:alestatus ==? "OK" ? '' : ' < '.l:alestatus
 endfunction
-set noshowmode
+hi StatusLine ctermbg=238 ctermfg=231
 set laststatus=2
 set statusline=
-set statusline+=%#LineNr#
-" Mode
-set statusline+=\ %{toupper(mode())}
+" Filename
+set statusline+=\ %-.80f
 " Git status
 set statusline+=%{GitStatus()}
-" Filename
-set statusline+=\ \>\ %-.80f
 " Modified/Readonly
 set statusline+=%{&modified?'\ +':''}
 set statusline+=%{&readonly?'\ RO':''}
@@ -109,6 +106,7 @@ nmap <leader>l  :bnext<CR>
 nmap <leader>h  :bprevious<CR>
 nmap <leader>f  :buffer<SPACE>
 nmap <leader>bq :bp <BAR> bd #<CR>
+nmap <leader>p  :b#<CR>
 " Basic window splitting
 nmap <leader><BAR> :vsplit<CR>
 nmap <leader>- :split<CR>
