@@ -2,7 +2,9 @@
 autoload -Uz promptinit
 setopt histignorealldups sharehistory promptsubst
 promptinit
-#prompt adam1
+
+autoload -U colors
+colors
 
 # Use vi keybindings
 bindkey -v
@@ -46,6 +48,7 @@ export LD_LIBRARY_PATH="$HOME/bin/rust/lib"
 
 path+=("$HOME/bin")
 path+=("$HOME/.cargo/bin")
+path+=("$HOME/.local/bin")
 
 export PATH
 export ZLE_REMOVE_SUFFIX_CHARS=""
@@ -56,18 +59,41 @@ export PYTHONPATH=${PYTHONPATH}:$HOME/src/androguard/
 git_prompt() {
     r_prompt=''
     if (git status 2> /dev/null 1> /dev/null); then
-        local dirty=''
         local branch=$(git branch 2> /dev/null | sed -n '/^\*/s/^\* //p')
-        if [[ $(git status --porcelain) != '' ]]; then
-            dirty='*'
+        local short_hash=$(git rev-parse --short HEAD 2>/dev/null)
+        local na="$(git log --oneline @{u}.. 2> /dev/null | wc -l | tr -d ' ')"
+        local nb="$(git log --oneline ..@{u} 2> /dev/null | wc -l | tr -d ' ')"
+        ahead=''
+        if [ "$na" -gt 0 ]; then
+            ahead=" +$na"
+        elif [ "$nb" -gt 0 ]; then
+            ahead=" -$nb"
         fi
-        r_prompt="[$dirty][$branch]"
+        r_prompt="[%B%F{white}$branch$ahead%f%b:%F{green}$short_hash%f] [%F{red}$(git_status)%f]"
     fi
     echo $r_prompt
 }
 
-vim_ins_mode="[I]"
-vim_cmd_mode="[N]"
+# From: https://codereview.stackexchange.com/questions/117639/bash-function-to-parse-git-status
+git_status() {
+    git status 2>/dev/null | (
+        unset dirty deleted untracked newfile ahead renamed
+        while read line ; do
+            case "$line" in
+              *modified:*)                      dirty='!' ; ;;
+              *deleted:*)                       deleted='x' ; ;;
+              *'Untracked files:')              untracked='?' ; ;;
+              *'new file:'*)                    newfile='+' ; ;;
+              *renamed:*)                       renamed='>' ; ;;
+            esac
+        done
+        bits="$dirty$deleted$untracked$newfile$ahead$renamed"
+        [ -n "$bits" ] && echo "$bits"
+    )
+}
+
+vim_ins_mode="I"
+vim_cmd_mode="N"
 vim_mode=$vim_ins_mode
 
 function zle-keymap-select {
@@ -81,8 +107,8 @@ function zle-line-init {
 }
 zle -N zle-line-init
 
-PROMPT='${vim_mode} %n@%m %~ %# '
-RPROMPT='$(git_prompt)'
+PROMPT='[%F{blue}%n@%m%f %F{cyan}%~%f] $(git_prompt)
+[%F{yellow}${vim_mode}%f] %# '
 
 if [ $TERM = "xterm" ] ; then
     if [ -n $COLORTERM ] ; then
