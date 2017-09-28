@@ -157,3 +157,7 @@ let g:tagbar_type_markdown = {
     \ },
     \ 'sort': 0,
 \ }
+" Markdown preview via make and pandoc
+autocmd FileType markdown let &makeprg='pandoc -s -o /tmp/md_output.html % | :silent !xdg-open /tmp/md_output.html'
+autocmd FileType markdown set tabstop=2 shiftwidth=2 softtabstop=2
+
