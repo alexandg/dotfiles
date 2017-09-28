@@ -736,7 +736,8 @@ function run_once(prg, args, pname, screen)
     end
 end
 
-run_once("xcompmgr")
+--run_once("xcompmgr")
+run_once("compton --backend glx --paint-on-overlay --vsync opengl-swc")
 run_once("/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1")
 run_once("start-pulseaudio-x11")
 run_once("xfce4-power-manager")
@@ -751,5 +752,5 @@ awful.spawn.with_shell(home_dir .. "/bin/update_vim_plugins.sh")
 awful.spawn("conky -c " .. home_dir .. "/.conkyrc.lua")
 awful.spawn("conky -c " .. home_dir .. "/.conkyrc2.lua")
 awful.spawn.with_shell(home_dir .. "/bin/tmux_sessions.sh")
-awful.spawn.with_shell("xmodmap " .. home_dir .. "/.xmodmaprc")
+awful.spawn.with_shell("setxkbmap -option 'caps:ctrl_modifier'")
 ---- }}}
