@@ -40,7 +40,7 @@ ${font Inconsolata:size=10}TIME ${hr 1}
 ${font Inconsolata:size=18}${time %d/%m/%Y}${alignr}${time %H:%M}
 ${font Inconsolata:size=10}NETWORK ${hr 1}
 
-Public IP: ${alignr}${execi 900 wget -q -O - http://ipinfo.io/ip}
+Public IP: ${alignr}${execi 900 wget -q -o /dev/null -O - http://ipinfo.io/ip}
 Local IP: ${if_up wlp3s0}${alignr}${addr wlp3s0}${else}${alignr}${addr enp0s25}${endif}
 
 ${if_up wlp3s0}Wireless: ${alignr}${wireless_essid wlp3s0}  ${wireless_link_qual wlp3s0}%${else}Wireless: ${alignr}N/A${endif}
@@ -53,7 +53,7 @@ ${if_up wlp3s0}${upspeedgraph wlp3s0 25,245}${else}${upspeedgraph enp0s25 25,245
 
 WEATHER ${hr 1}
 
-COLD
+${execi 1800 ~/bin/weather.py}
 
 ${font Inconsolata:size=10}CALENDAR ${hr 1}
 
