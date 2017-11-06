@@ -39,24 +39,29 @@ ${font Inconsolata:size=10}SYSTEM ${hr}
 Hostname: ${alignr}${nodename}
 Kernel: ${alignr}${kernel}
 Uptime: ${alignr}${uptime}
+
+BATTERY ${hr 1}
+
 Battery Front: ${alignr}${battery_short BAT0} ${battery_time BAT0}
+${battery_bar 4 BAT0}
 Battery Rear: ${alignr}${if_existing /sys/class/power_supply/BAT1/status}${battery_short BAT1} ${battery_time BAT1}${else}Unplugged${endif}
+${battery_bar 4 BAT1}
 
 PROCESSORS ${hr 1}
 
 CPU1: ${alignr}${hwmon temp 1}C  ${freq 1} MHz   ${cpu cpu1}%
-${cpugraph cpu1 25,245}
+${cpugraph cpu1 24}
 CPU2: ${alignr}${hwmon temp 1}C  ${freq 2} MHz   ${cpu cpu2}%
-${cpugraph cpu2 25,245}
+${cpugraph cpu2 24}
 CPU3: ${alignr}${hwmon temp 1}C  ${freq 1} MHz   ${cpu cpu3}%
-${cpugraph cpu3 25,245}
+${cpugraph cpu3 24}
 CPU4: ${alignr}${hwmon temp 1}C  ${freq 2} MHz   ${cpu cpu4}%
-${cpugraph cpu4 25,245}
+${cpugraph cpu4 24}
 
 MEMORY ${hr 1}
 
 Ram ${alignr}$mem / $memmax ($memperc%)
-${memgraph 25,245}
+${memgraph 24}
 swap ${alignr}$swap / $swapmax ($swapperc%)
 ${swapbar 4}
 
@@ -66,15 +71,11 @@ Highest CPU $alignr CPU%  MEM-RES
 ${top name 1}$alignr${top cpu 1}  ${top mem_res 1}
 ${top name 2}$alignr${top cpu 2}  ${top mem_res 2}
 ${top name 3}$alignr${top cpu 3}  ${top mem_res 3}
-${top name 4}$alignr${top cpu 4}  ${top mem_res 4}
-${top name 5}$alignr${top cpu 5}  ${top mem_res 5}
 
 Highest MEM $alignr CPU%  MEM-RES
 ${top_mem name 1}$alignr${top_mem cpu 1}  ${top_mem mem_res 1}
 ${top_mem name 2}$alignr${top_mem cpu 2}  ${top_mem mem_res 2}
 ${top_mem name 3}$alignr${top_mem cpu 3}  ${top_mem mem_res 3}
-${top_mem name 4}$alignr${top_mem cpu 4}  ${top_mem mem_res 4}
-${top_mem name 5}$alignr${top_mem cpu 5}  ${top_mem mem_res 5}
 
 Filesystems ${hr 1}
 
