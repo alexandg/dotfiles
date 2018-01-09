@@ -13,7 +13,7 @@ local hotkeys_popup = require("awful.hotkeys_popup").widget
 local common = require("awful.widget.common")
 
 -- Load Debian menu entries
-require("debian.menu")
+-- require("debian.menu")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -100,7 +100,7 @@ myawesomemenu = {
 
 mymainmenu = awful.menu({ items = {
     { "Awesome", myawesomemenu, beautiful.awesome_icon },
-    { "Debian", debian.menu.Debian_menu.Debian },
+    --{ "Debian", debian.menu.Debian_menu.Debian },
     { "Open Terminal", terminal },
     { "Lock Screen", function () awful.spawn("xscreensaver-command -lock") end },
     { "Suspend", "systemctl suspend" },
