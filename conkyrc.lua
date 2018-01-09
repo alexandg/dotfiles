@@ -50,18 +50,18 @@ ${battery_bar 4 BAT1}
 PROCESSORS ${hr 1}
 
 CPU1: ${alignr}${hwmon temp 1}C  ${freq 1} MHz   ${cpu cpu1}%
-${cpugraph cpu1 24}
+${cpugraph cpu1 18}
 CPU2: ${alignr}${hwmon temp 1}C  ${freq 2} MHz   ${cpu cpu2}%
-${cpugraph cpu2 24}
+${cpugraph cpu2 18}
 CPU3: ${alignr}${hwmon temp 1}C  ${freq 1} MHz   ${cpu cpu3}%
-${cpugraph cpu3 24}
+${cpugraph cpu3 18}
 CPU4: ${alignr}${hwmon temp 1}C  ${freq 2} MHz   ${cpu cpu4}%
-${cpugraph cpu4 24}
+${cpugraph cpu4 18}
 
 MEMORY ${hr 1}
 
 Ram ${alignr}$mem / $memmax ($memperc%)
-${memgraph 24}
+${memgraph 18}
 swap ${alignr}$swap / $swapmax ($swapperc%)
 ${swapbar 4}
 
@@ -80,6 +80,8 @@ ${top_mem name 3}$alignr${top_mem cpu 3}  ${top_mem mem_res 3}
 Filesystems ${hr 1}
 
 Root: ${alignr}${fs_free /} / ${fs_size /}
+${fs_bar 4 /}
+Boot: ${alignr}${fs_free /boot} / ${fs_size /boot}
 ${fs_bar 4 /}
 Var: ${alignr}${fs_free /var} / ${fs_size /var}
 ${fs_bar 4 /var}
