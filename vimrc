@@ -136,6 +136,7 @@ let g:jedi#usages_command=""
 " ale error navigation commands
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
+let g:rustfmt_command = "cargo +nightly fmt -- "
 let g:ale_echo_msg_format = '[%linter%] %severity% %s'
 let g:ale_rust_cargo_use_check=1
 let g:ale_linters = {
@@ -160,4 +161,3 @@ let g:tagbar_type_markdown = {
 " Markdown preview via make and pandoc
 autocmd FileType markdown let &makeprg='pandoc -s -o /tmp/md_output.html % | :silent !xdg-open /tmp/md_output.html'
 autocmd FileType markdown set tabstop=2 shiftwidth=2 softtabstop=2
-
