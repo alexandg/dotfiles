@@ -163,3 +163,10 @@ autocmd FileType markdown let &makeprg='pandoc -s -o /tmp/md_output.html % | :si
 autocmd FileType markdown set tabstop=2 shiftwidth=2 softtabstop=2
 " Rust Doc
 let g:rust_doc#download_rust_doc_dir='$HOME/.rustup/toolchains/stable-x86_64-unknown-linux-gnu'
+" gitcommit
+autocmd Filetype gitcommit setlocal spell textwidth=72
+" Tmp fix while VIM bugs get sorted
+let g:ale_echo_cursor=0
+" Buffergator on the top
+let g:buffergator_viewport_split_policy="T"
+let g:buffergator_hsplit_size=10
