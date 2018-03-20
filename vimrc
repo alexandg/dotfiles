@@ -73,8 +73,18 @@ set statusline+=\ \<\ %{&fileencoding}
 " Cursor line and column
 set statusline+=\ \<\ %c:%l\ (%p%%)
 " ALE status
-"set statusline+=\ \<\ %{ALEGetStatusLine()}
-set statusline+=%{AleStatus()}
+function! AleLinterStatus() abort
+    let l:counts = ale#statusline#Count(bufnr(''))
+    let l:all_errors = l:counts.error + l:counts.style_error
+    let l:all_non_errors = l:counts.total - l:all_errors
+
+    return l:counts.total == 0 ? ' < OK' : printf(
+                \ ' < %d Warnings %d Errors',
+                \ all_non_errors,
+                \ all_errors
+                \)
+endfunction
+set statusline+=%{AleLinterStatus()}
 set statusline+=\  " Padding
 " Close Omnicomplete window on select
 autocmd cursorMovedI * if pumvisible() == 0|pclose|endif
@@ -133,10 +143,9 @@ let g:autopep8_disable_show_diff=1
 let g:jedi#popup_on_dot=0
 let g:jedi#show_call_signatures="2"
 let g:jedi#usages_command=""
-" ale error navigation commands
+" ale config
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
-let g:rustfmt_command = "cargo +nightly fmt -- "
 let g:ale_echo_msg_format = '[%linter%] %severity% %s'
 let g:ale_rust_cargo_use_check=1
 let g:ale_linters = {
@@ -170,3 +179,5 @@ let g:ale_echo_cursor=0
 " Buffergator on the top
 let g:buffergator_viewport_split_policy="T"
 let g:buffergator_hsplit_size=10
+" rust.vim
+let g:rustfmt_command = "cargo +nightly fmt -- "
