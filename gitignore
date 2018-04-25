@@ -19,3 +19,16 @@
 
 target/
 Cargo.lock
+
+*.dvi
+*.aux
+*.tex.backup
+*.log
+*.lot
+*.toc
+*.lof
+*.blg
+*.bbl
+*.bak
+*.out
+*.tex~
