@@ -57,11 +57,17 @@ match ErrorMsg '\s\+$'
 nnoremap <Leader>rtw :%s/\s\+$//e<CR>
 
 " ===== STATUSLINE =====
+hi StatusLine ctermbg=238 ctermfg=231
+hi User1 ctermbg=60 ctermfg=231
+hi User2 ctermbg=67 ctermfg=231
+hi User3 ctermbg=66 ctermfg=231
+hi User4 ctermbg=131 ctermfg=238
+
 function! GitStatus()
     let l:fugitive = fugitive#statusline()
     let l:fugitive = substitute(l:fugitive, '\[', '', 'g')
     let l:fugitive = substitute(l:fugitive, '\]', '', 'g')
-    return strlen(l:fugitive) > 0 ? ' > '.l:fugitive : ''
+    return strlen(l:fugitive) > 0 ? l:fugitive : ''
 endfunction
 
 function! AleLinterStatus() abort
@@ -69,35 +75,39 @@ function! AleLinterStatus() abort
     let l:all_errors = l:counts.error + l:counts.style_error
     let l:all_non_errors = l:counts.total - l:all_errors
 
-    return l:counts.total == 0 ? ' < OK' : printf(
-                \ ' < %d Warnings %d Errors',
+    return l:counts.total == 0 ? 'OK' : printf(
+                \'%d Warnings %d Errors',
                 \ all_non_errors,
                 \ all_errors
                 \)
 endfunction
 
-hi StatusLine ctermbg=238 ctermfg=231
-set laststatus=2
-set statusline=
+let sline=""
 " Filename
-set statusline+=\ %-.80f
+let sline.="%1*"
+let sline.=" %-.80f "
 " Git status
-set statusline+=%{GitStatus()}
+let sline.="%2*"
+let sline.=" %{GitStatus()} "
 " Modified/Readonly
-set statusline+=%{&modified?'\ +':''}
-set statusline+=%{&readonly?'\ RO':''}
-set statusline+=\ \>
+let sline.="%3*"
+let sline.="%{&modified?' + ':''}"
+let sline.="%{&readonly?' RO ':''}"
 " left/right separator
-set statusline+=%=
-" Modified/Readonly
+let sline.="%#StatusLine#"
+let sline.="%=""
 " Filetype
-set statusline+=\ \<\ %{&filetype}
-" File encoding
-set statusline+=\ \<\ %{&fileencoding}
+let sline.="%3*"
+let sline.=" %{&filetype} "
 " Cursor line and column
-set statusline+=\ \<\ %c:%l\ (%p%%)
-set statusline+=%{AleLinterStatus()}
-set statusline+=\  " Padding
+let sline.="%2*"
+let sline.=" %c:%l (%p%%) "
+" ALE status
+let sline.="%1*"
+let sline.=" %{AleLinterStatus()} "
+
+set laststatus=2
+set statusline=%!sline
 
 " ===== AUTOCMD =====
 " Omnicomplete
