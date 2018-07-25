@@ -23,6 +23,13 @@ setlocal conceallevel=0
 set hlsearch
 set pastetoggle=<F5>
 
+" ===== TRUE COLORS =====
+set termguicolors
+if &term =~# '^screen'
+    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+endif
+
 " ===== MAPPINGS =====
 nnoremap <F2> :set nonumber!<CR>:set foldcolumn=0<CR>
 nnoremap <F9> :setlocal spell! spelllang=en_us<CR>
@@ -57,11 +64,12 @@ match ErrorMsg '\s\+$'
 nnoremap <Leader>rtw :%s/\s\+$//e<CR>
 
 " ===== STATUSLINE =====
-hi StatusLine ctermbg=238 ctermfg=231
+"hi StatusLine ctermbg=234 ctermfg=231
 hi User1 ctermbg=60 ctermfg=231
 hi User2 ctermbg=67 ctermfg=231
-hi User3 ctermbg=66 ctermfg=231
+hi User3 ctermbg=73 ctermfg=231
 hi User4 ctermbg=131 ctermfg=238
+hi User5 ctermbg=238 ctermfg=231
 
 function! GitStatus()
     let l:fugitive = fugitive#statusline()
@@ -94,7 +102,8 @@ let sline.="%3*"
 let sline.="%{&modified?' + ':''}"
 let sline.="%{&readonly?' RO ':''}"
 " left/right separator
-let sline.="%#StatusLine#"
+"let sline.="%#StatusLine#"
+let sline.="%5*"
 let sline.="%=""
 " Filetype
 let sline.="%3*"
