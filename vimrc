@@ -63,6 +63,9 @@ nmap <leader>- :split<CR>
 match ErrorMsg '\s\+$'
 nnoremap <Leader>rtw :%s/\s\+$//e<CR>
 
+" ===== COMMANDS =====
+command InsertDate put =strftime('%Y-%m-%d')
+
 " ===== STATUSLINE =====
 "hi StatusLine ctermbg=234 ctermfg=231
 hi User1 ctermbg=60 ctermfg=231
