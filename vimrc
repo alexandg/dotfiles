@@ -140,20 +140,6 @@ autocmd Filetype gitcommit setlocal spell textwidth=72
 " ===== TAGBAR =====
 let g:tagbar_left = 1
 let g:tagbar_autoclose = 1
-" Tagbar support for Rust
-let g:tagbar_type_rust = {
-    \ 'ctagstype' : 'rust',
-    \ 'kinds' : [
-        \'m:modules,module names',
-        \'c:consts,static constants',
-        \'T:types,type definitions',
-        \'g:enum,enumeration names',
-        \'s:structure names',
-        \'t:traits,traits',
-        \'i:impls,trait implementations',
-        \'f:functions,function definitions',
-    \]
-    \}
 " Tagbar support for Markdown
 let g:tagbar_type_markdown = {
     \ 'ctagstype': 'markdown',
