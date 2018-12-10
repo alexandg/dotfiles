@@ -203,5 +203,3 @@ let g:jedi#usages_command=""
 " ===== RUSTDOC =====
 let g:rust_doc#download_rust_doc_dir='$HOME/.rustup/toolchains/stable-x86_64-unknown-linux-gnu'
 
-" ===== RUST.VIM =====
-let g:rustfmt_command = "rustup run nightly rustfmt"
