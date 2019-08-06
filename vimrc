@@ -8,7 +8,6 @@ set nocompatible
 set shell=/bin/zsh
 set ofu=syntaxcomplete#Complete
 set number
-set t_Co=256
 set background=dark
 colorscheme apprentice
 set cc=80
@@ -24,10 +23,10 @@ set hlsearch
 set pastetoggle=<F5>
 
 " ===== TRUE COLORS =====
-set termguicolors
-if &term =~# '^screen'
+if exists('+termguicolors')
     let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
     let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+    set termguicolors
 endif
 
 " ===== MAPPINGS =====
@@ -202,4 +201,3 @@ let g:jedi#usages_command=""
 
 " ===== RUSTDOC =====
 let g:rust_doc#download_rust_doc_dir='$HOME/.rustup/toolchains/stable-x86_64-unknown-linux-gnu'
-
