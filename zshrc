@@ -69,7 +69,7 @@ git_prompt() {
         elif [ "$nb" -gt 0 ]; then
             ahead=" -$nb"
         fi
-        r_prompt="[%B%F{white}$branch$ahead%f%b:%F{green}$short_hash%f] [%F{red}$(git_status)%f]"
+        r_prompt="[%B%F{red}$branch$ahead%f%b:%F{orange}$short_hash%f] [%F{yellow}$(git_status)%f]"
     fi
     echo $r_prompt
 }
@@ -107,7 +107,7 @@ function zle-line-init {
 }
 zle -N zle-line-init
 
-PROMPT='[%F{blue}%n@%m%f %F{cyan}%~%f] $(git_prompt)
-[%F{yellow}${vim_mode}%f] %# '
+PROMPT='[%F{magenta}%n@%m%f %F{blue}%~%f] $(git_prompt)
+[%F{green}${vim_mode}%f] %# '
 
 source $HOME/.zsh_aliases

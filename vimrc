@@ -9,7 +9,8 @@ set shell=/bin/zsh
 set ofu=syntaxcomplete#Complete
 set number
 set background=dark
-colorscheme apprentice
+"colorscheme apprentice
+colorscheme PaperColor
 set cc=80
 set expandtab
 set tabstop=4
@@ -21,13 +22,6 @@ set conceallevel=0
 setlocal conceallevel=0
 set hlsearch
 set pastetoggle=<F5>
-
-" ===== TRUE COLORS =====
-if exists('+termguicolors')
-    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-    set termguicolors
-endif
 
 " ===== MAPPINGS =====
 nnoremap <F2> :set nonumber!<CR>:set foldcolumn=0<CR>
@@ -66,18 +60,21 @@ nnoremap <Leader>rtw :%s/\s\+$//e<CR>
 command InsertDate put =strftime('%Y-%m-%d')
 
 " ===== STATUSLINE =====
-"hi StatusLine ctermbg=234 ctermfg=231
-hi User1 ctermbg=60 ctermfg=231
-hi User2 ctermbg=67 ctermfg=231
-hi User3 ctermbg=73 ctermfg=231
-hi User4 ctermbg=131 ctermfg=238
-hi User5 ctermbg=238 ctermfg=231
+hi StatusLine ctermbg=234 ctermfg=234
+" blue (Field 1)
+hi User1 ctermbg=244 ctermfg=234
+" magenta (Field 2)
+hi User2 ctermbg=74 ctermfg=234
+" cyan (Field 3)
+hi User3 ctermbg=173 ctermfg=234
+" brightblack (Background)
+hi User5 ctermbg=240 ctermfg=231
 
 function! GitStatus()
     let l:fugitive = fugitive#statusline()
     let l:fugitive = substitute(l:fugitive, '\[', '', 'g')
     let l:fugitive = substitute(l:fugitive, '\]', '', 'g')
-    return strlen(l:fugitive) > 0 ? l:fugitive : ''
+    return strlen(l:fugitive) > 0 ? l:fugitive : 'n/a'
 endfunction
 
 function! AleLinterStatus() abort
@@ -101,8 +98,8 @@ let sline.="%2*"
 let sline.=" %{GitStatus()} "
 " Modified/Readonly
 let sline.="%3*"
-let sline.="%{&modified?' + ':''}"
-let sline.="%{&readonly?' RO ':''}"
+let sline.=" %{&modified?'+':''}"
+let sline.="%{&readonly?'RO':''} "
 " left/right separator
 "let sline.="%#StatusLine#"
 let sline.="%5*"
