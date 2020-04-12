@@ -1,5 +1,6 @@
-" ===== PATHOGEN =====
 syntax on
+
+" ===== PATHOGEN =====
 call pathogen#infect()
 filetype plugin indent on
 
@@ -9,7 +10,6 @@ set shell=/bin/zsh
 set ofu=syntaxcomplete#Complete
 set number
 set background=dark
-"colorscheme apprentice
 colorscheme PaperColor
 set cc=80
 set expandtab
@@ -56,19 +56,16 @@ nmap <leader>- :split<CR>
 match ErrorMsg '\s\+$'
 nnoremap <Leader>rtw :%s/\s\+$//e<CR>
 
-" ===== COMMANDS =====
-command InsertDate put =strftime('%Y-%m-%d')
-
 " ===== STATUSLINE =====
-hi StatusLine ctermbg=234 ctermfg=234
+hi StatusLine ctermbg=0 ctermfg=0
 " blue (Field 1)
-hi User1 ctermbg=244 ctermfg=234
+hi User1 ctermbg=5 ctermfg=0
 " magenta (Field 2)
-hi User2 ctermbg=74 ctermfg=234
+hi User2 ctermbg=4 ctermfg=0
 " cyan (Field 3)
-hi User3 ctermbg=173 ctermfg=234
+hi User3 ctermbg=6 ctermfg=0
 " brightblack (Background)
-hi User5 ctermbg=240 ctermfg=231
+hi User5 ctermbg=236 ctermfg=0
 
 function! GitStatus()
     let l:fugitive = fugitive#statusline()
@@ -125,32 +122,16 @@ autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 " Set up rust files to use cargo to make/build
 autocmd BufRead,BufNewFile Cargo.toml,Cargo.lock,*.rs compiler cargo
 
-" Markdown preview via make and pandoc
-autocmd FileType markdown let &makeprg='pandoc -s -o /tmp/md_output.html % | :silent !xdg-open /tmp/md_output.html'
-autocmd FileType markdown set tabstop=2 shiftwidth=2 softtabstop=2
-
 " gitcommit
 autocmd Filetype gitcommit setlocal spell textwidth=72
 
+"
 " ========== PLUGINS ==========
+"
+
 " ===== TAGBAR =====
 let g:tagbar_left = 1
 let g:tagbar_autoclose = 1
-" Tagbar support for Markdown
-let g:tagbar_type_markdown = {
-    \ 'ctagstype': 'markdown',
-    \ 'ctagsbin' : $HOME . '/src/markdown2ctags/markdown2ctags.py',
-    \ 'ctagsargs' : '-f - --sort=yes',
-    \ 'kinds' : [
-        \ 's:sections',
-        \ 'i:images'
-    \ ],
-    \ 'sro' : '|',
-    \ 'kind2scope' : {
-        \ 's' : 'section',
-    \ },
-    \ 'sort': 0,
-\ }
 
 " ===== SUPERTAB =====
 let g:SuperTabDefaultCompletionType="context"
