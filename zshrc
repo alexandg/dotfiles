@@ -69,7 +69,7 @@ git_prompt() {
         elif [ "$nb" -gt 0 ]; then
             ahead=" -$nb"
         fi
-        r_prompt="[%B%F{red}$branch$ahead%f%b:%F{orange}$short_hash%f] [%F{yellow}$(git_status)%f]"
+        r_prompt="[%B%F{green}$branch$ahead%f%b:%F{yellow}$short_hash%f] [%F{red}$(git_status)%f]"
     fi
     echo $r_prompt
 }
