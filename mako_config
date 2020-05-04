@@ -1,0 +1,7 @@
+max-visible=5
+font=Inconsolata:10
+background-color=1c1c1c
+text-color=d0d0d0
+icons=1
+default-timeout=5000
+padding=16 4 0 0
