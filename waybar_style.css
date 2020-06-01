@@ -40,13 +40,9 @@ window#waybar {
 
 #workspaces button {
 	padding: 0 2px;
-	/*color: #d0d0d0;*/
-	/*background: #1c1c1c;*/
 }
 
 #workspaces button.focused {
-	/*color: #af87d7;*/
-	/*color: #5fafd7;*/
 	background: #d0d0d0;
 	color: #1c1c1c;
 }
@@ -61,49 +57,3 @@ window#waybar {
 	border: #585858;
 	padding: 0 3px;
 }
-
-#pulseaudio {
-    /*red*/
-	/*color: #af005f;*/
-	/*color: #5fafd7;*/
-}
-
-#memory {
-    /*green*/
-	/*color: #5faf00;*/
-	/*color: #5fafd7;*/
-}
-
-#cpu {
-    /*yellow*/
-	/*color: #d7af5f;*/
-	/*color: #5fafd7;*/
-}
-
-#battery {
-    /*blue*/
-	/*color: #5fafd7;*/
-}
-
-#disk {
-    /*magenta*/
-	/*color: #5fafd7;*/
-	/*color: #808080;*/
-}
-
-#network {
-    /*cyan*/
-    /*color: #d7875f;*/
-	/*color: #5fafd7;*/
-}
-
-/*#clock,*/
-/*#pulseaudio,*/
-/*#memory,*/
-/*#cpu,*/
-/*#battery,*/
-/*#custom-uptime,*/
-/*#backlight,*/
-/*#disk {*/
-	/*padding: 0 10px;*/
-/*}*/
