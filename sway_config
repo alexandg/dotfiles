@@ -77,7 +77,7 @@ workspace Email
 # Appearance
 #
 font Inconsolata:10
-default_border pixel 2
+default_border pixel 3
 
 #
 ### Key bindings
@@ -271,6 +271,7 @@ mode "resize" {
 assign [app_id="io.github.quodlibet.QuodLibet"] workspace Music
 assign [app_id="pithos"] workspace Music
 assign [app_id="thunderbird"] workspace Email
+for_window [app_id="keepassx"] move scratchpad
 
 # Execs
 exec {
@@ -289,6 +290,7 @@ exec_always {
     gsettings set $gnome-schema font-name 'Inconsolata 10'
     gsettings set $gnome-schema monospace-font-name 'Inconsolata 10'
     gsettings set $gnome-schema document-font-name 'Inconsolata 10'
+    swaymsg 'splitv'
 }
 
 include /etc/sway/config.d/*

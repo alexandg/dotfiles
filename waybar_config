@@ -121,7 +121,7 @@
 		"path": "/"
 	},
 	"tray": {
-		"icon-size": 20
+		"icon-size": 24
 	},
     "network": {
         "format-wifi": " {essid} {signalStrength}%",
