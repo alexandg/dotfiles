@@ -29,50 +29,93 @@ font:
   # Point size
   size: 10.0
 
-# Colors (Moonfly)
-#draw_bold_text_with_bright_colors: false
-# Base16 PaperColor Dark 256 - alacritty color config
-# Jon Leopard (http://github.com/jonleopard) based on PaperColor Theme (https://github.com/NLKNguyen/papercolor-theme)
+# Colors
 colors:
-  # Default colors
   primary:
-    background: '0x1c1c1c'
-    foreground: '0x808080'
+    background: '0x121619'
+    foreground: '0xc1c7cd'
 
-  # Colors the cursor will use if `custom_cursor_colors` is true
-  cursor:
-    text: '0x1c1c1c'
-    cursor: '0x808080'
+  # Cursor colors
+  #cursor:
+    #text: CellBackground
+    #cursor: CellForeground
+
+  # Vi mode cursor colors
+  vi_mode_cursor:
+    text: CellBackground
+    cursor: CellForeground
+
+  # Selection colors
+  selection:
+    text: CellBackground
+    background: CellForeground
+
+  # Search colors
+  #search:
+    #matches:
+      #foreground: '#000000'
+      #background: '#ffffff'
+
+    #bar:
+      #background: '#c5c8c6'
+      #foreground: '#1d1f21'
 
   # Normal colors
+  #normal:
+    #black:   '0x121619'
+    #red:     '0xee6677'
+    #green:   '0x228833'
+    #yellow:  '0xccbb44'
+    #blue:    '0x4477aa'
+    #magenta: '0xaa3377'
+    #cyan:    '0x66ccee'
+    #white:   '0xa2a9b0'
+
+  # Bright colors
+  #bright:
+    #black:   '0x697077'
+    #red:     '0xcc3311'
+    #green:   '0x009988'
+    #yellow:  '0xee7733'
+    #blue:    '0x0077bb'
+    #magenta: '0xee3377'
+    #cyan:    '0x33bbee'
+    #white:   '0xf2f4f8'
+
   normal:
-    black:   '0x1c1c1c'
-    red:     '0x585858'
-    green:   '0xaf87d7'
-    yellow:  '0xafd700'
-    blue:    '0xff5faf'
-    magenta: '0x00afaf'
-    cyan:    '0xffaf00'
-    white:   '0x808080'
+    black:   '0x121619'
+    red:     '0xd55e00'
+    green:   '0x009e73'
+    yellow:  '0xf0e442'
+    blue:    '0x0072b2'
+    magenta: '0xcc79a7'
+    cyan:    '0x56b4e9'
+    white:   '0xa2a9b0'
 
   # Bright colors
   bright:
-    black:   '0xd7af5f'
-    red:     '0x585858'
-    green:   '0xaf87d7'
-    yellow:  '0xafd700'
-    blue:    '0xff5faf'
-    magenta: '0x00afaf'
-    cyan:    '0xffaf00'
-    white:   '0xd0d0d0'
+    black:   '0x697077'
+    red:     '0xee6677'
+    green:   '0x228833'
+    yellow:  '0xccbb44'
+    blue:    '0x4477aa'
+    magenta: '0xaa3377'
+    cyan:    '0x66ccee'
+    white:   '0xf2f4f8'
 
-  indexed_colors:
-    - { index: 16, color: '0x5faf5f' }
-    - { index: 17, color: '0x5f8787' }
-    - { index: 18, color: '0xaf005f' }
-    - { index: 19, color: '0x5faf00' }
-    - { index: 20, color: '0x5fafd7' }
-    - { index: 21, color: '0xd7875f' }
+  # Dim colors
+  #
+  # If the dim colors are not set, they will be calculated automatically based
+  # on the `normal` colors.
+  #dim:
+    #black:   '#131416'
+    #red:     '#864343'
+    #green:   '#777c44'
+    #yellow:  '#9e824c'
+    #blue:    '#556a7d'
+    #magenta: '#75617b'
+    #cyan:    '#5b7d78'
+    #white:   '#828482'
 
   # Indexed Colors
   #
@@ -80,9 +123,9 @@ colors:
   # When these are not set, they're filled with sensible defaults.
   #
   # Example:
-  #   `- { index: 16, color: '0xff00ff' }`
+  #   `- { index: 16, color: '#ff00ff' }`
   #
-  indexed_colors: []
+  #indexed_colors: []
 
 # Background opacity
 #
@@ -97,7 +140,7 @@ selection:
   save_to_clipboard: false
 
 # Allow terminal applications to change Alacritty's window title.
-dynamic_title: true
+#dynamic_title: true
 
 cursor:
   # Cursor style
