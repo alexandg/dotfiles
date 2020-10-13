@@ -19,6 +19,9 @@ HISTSIZE=1000
 SAVEHIST=1000
 HISTFILE=~/.zsh_history
 
+# Custom zfuncs
+fpath+=~/.zfunc
+
 # Use modern completion system
 autoload -Uz compinit
 compinit
@@ -59,17 +62,17 @@ export PYTHONPATH=${PYTHONPATH}:$HOME/src/androguard/
 git_prompt() {
     r_prompt=''
     if (git status 2> /dev/null 1> /dev/null); then
-        local branch=$(git branch 2> /dev/null | sed -n '/^\*/s/^\* //p')
+        local branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
         local short_hash=$(git rev-parse --short HEAD 2>/dev/null)
-        local na="$(git log --oneline @{u}.. 2> /dev/null | wc -l | tr -d ' ')"
-        local nb="$(git log --oneline ..@{u} 2> /dev/null | wc -l | tr -d ' ')"
-        ahead=''
-        if [ "$na" -gt 0 ]; then
-            ahead=" +$na"
-        elif [ "$nb" -gt 0 ]; then
-            ahead=" -$nb"
-        fi
-        r_prompt="[%B%F{green}$branch$ahead%f%b:%F{yellow}$short_hash%f] [%F{red}$(git_status)%f]"
+        #local na="$(git log --oneline @{u}.. 2> /dev/null | wc -l | tr -d ' ')"
+        #local nb="$(git log --oneline ..@{u} 2> /dev/null | wc -l | tr -d ' ')"
+        #ahead=''
+        #if [ "$na" -gt 0 ]; then
+            #ahead=" +$na"
+        #elif [ "$nb" -gt 0 ]; then
+            #ahead=" -$nb"
+        #fi
+        r_prompt="%F{white} on %B%F{yellow}$branch%f%b:%F{magenta}$short_hash%f %F{red}[$(git_status)]%f"
     fi
     echo $r_prompt
 }
@@ -107,7 +110,10 @@ function zle-line-init {
 }
 zle -N zle-line-init
 
-PROMPT='[%F{magenta}%n@%m%f %F{blue}%~%f] $(git_prompt)
-[%F{green}${vim_mode}%f] %# '
+PROMPT='%F{green}%n@%m%f %F{white}in %F{blue}%~%f$(git_prompt)
+[%F{cyan}${vim_mode}%f] %# '
+
+# Disable pip keyring nonsense until they make it opt-IN instead of always-ON
+export PYTHON_KEYRING_BACKEND=keyring.backends.null.Keyring
 
 source $HOME/.zsh_aliases
