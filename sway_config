@@ -16,7 +16,7 @@ set $up k
 set $right l
 
 # Your preferred terminal emulator
-set $term alacritty
+set $term ~/bin/alacritty
 
 # Your preferred application launcher
 set $menu dmenu_path | wofi --show drun -I --width=800 | xargs swaymsg exec --
@@ -28,13 +28,14 @@ set $gnome-schema org.gnome.desktop.interface
 ### Output configuration
 #
 output * bg ~/Pictures/darkwood_wallpaper.jpg fill
+#output * bg ~/Pictures/cyber-wallpaper.jpg fill
 
 #
 ### Idle configuration
 #
 exec swayidle -w \
-    timeout 900 'swaylock -f -C ~/.config/swaylock/config' \
-    timeout 1200 'swaymsg "output * dpms off"' \
+    timeout 600 'swaylock -f -C ~/.config/swaylock/config' \
+    timeout 900 'swaymsg "output * dpms off"' \
     resume 'swaymsg "output * dpms on"' \
     before-sleep 'swaylock -f -C ~/.config/swaylock/config'
 
@@ -52,7 +53,6 @@ input type:keyboard {
 input type:touchpad {
     natural_scroll enabled
     scroll_method two_finger
-    click_method clickfinger
 }
 
 #
@@ -77,7 +77,7 @@ workspace Email
 # Appearance
 #
 font Inconsolata:10
-default_border pixel 3
+default_border pixel 2
 
 #
 ### Key bindings
@@ -165,8 +165,8 @@ default_border pixel 3
     # You can "split" the current object of your focus with
     # $mod+b or $mod+v, for horizontal and vertical splits
     # respectively.
-    bindsym $mod+minus splith
-    bindsym $mod+| splitv
+    bindsym $mod+b splith
+    bindsym $mod+v splitv
 
     # Switch the current container between different layout styles
     bindsym $mod+s layout stacking
@@ -263,24 +263,22 @@ mode "resize" {
     ## Tray icon
     #tray_output *
     #icon_theme "Papirus-Dark"
+
+    #swaybar_command ~/bin/waybar
 #}
 
-# Assign applications to specific workspace
+# Application specific rules
 assign [app_id="io.github.quodlibet.QuodLibet"] workspace Music
 assign [app_id="pithos"] workspace Music
 assign [app_id="thunderbird"] workspace Email
 
-# Application specific rules
-for_window [app_id="firefox"] inhibit_idle fullscreen
-for_window [class="Chromium"] inhibit_idle fullscreen
-
 # Execs
 exec {
     mako
-    ~/bin/waybar
-    wicd-gtk --tray
-    thunderbird
+    nm-applet --indicator
     brightnessctl set 30%
+    ~/bin/waybar
+    thunderbird
     ~/bin/tmux_sessions.sh
     swaymsg 'workspace 1'
 }
