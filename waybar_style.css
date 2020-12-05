@@ -4,22 +4,22 @@
 }
 
 window#waybar {
-	background: #1c1c1c;
-	color: #d0d0d0;
+	background: #121619;
+	color: #f2f4f8;
 }
 
 #custom-right-arrow-dark,
 #custom-left-arrow-dark {
-	color: #585858;
+	color: #697077;
 }
 #custom-right-arrow-light,
 #custom-left-arrow-light {
-	color: #1c1c1c;
-	background: #585858;
+	color: #121619;
+	background: #697077;
 }
 
 #workspaces {
-	background: #585858;
+	background: #697077;
 }
 
 #clock.1,
@@ -34,7 +34,7 @@ window#waybar {
 #backlight,
 #custom-uptime,
 #tray {
-	background: #585858;
+	background: #697077;
 	padding: 0 10px;
 }
 
@@ -43,8 +43,8 @@ window#waybar {
 }
 
 #workspaces button.focused {
-	background: #d0d0d0;
-	color: #1c1c1c;
+	background: #f2f4f8;
+	color: #121619;
 }
 
 #workspaces button:hover {
@@ -53,7 +53,7 @@ window#waybar {
 }
 
 #workspaces button:hover {
-	background: #585858;
-	border: #585858;
+	background: #697077;
+	border: #697077;
 	padding: 0 3px;
 }

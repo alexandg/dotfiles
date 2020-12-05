@@ -28,14 +28,13 @@ set $gnome-schema org.gnome.desktop.interface
 ### Output configuration
 #
 output * bg ~/Pictures/darkwood_wallpaper.jpg fill
-#output * bg ~/Pictures/cyber-wallpaper.jpg fill
 
 #
 ### Idle configuration
 #
 exec swayidle -w \
-    timeout 600 'swaylock -f -C ~/.config/swaylock/config' \
-    timeout 900 'swaymsg "output * dpms off"' \
+    timeout 900 'swaylock -f -C ~/.config/swaylock/config' \
+    timeout 1200 'swaymsg "output * dpms off"' \
     resume 'swaymsg "output * dpms on"' \
     before-sleep 'swaylock -f -C ~/.config/swaylock/config'
 
@@ -53,6 +52,7 @@ input type:keyboard {
 input type:touchpad {
     natural_scroll enabled
     scroll_method two_finger
+    click_method clickfinger
 }
 
 #
@@ -165,8 +165,8 @@ default_border pixel 3
     # You can "split" the current object of your focus with
     # $mod+b or $mod+v, for horizontal and vertical splits
     # respectively.
-    bindsym $mod+b splith
-    bindsym $mod+v splitv
+    bindsym $mod+minus splith
+    bindsym $mod+| splitv
 
     # Switch the current container between different layout styles
     bindsym $mod+s layout stacking
@@ -263,15 +263,16 @@ mode "resize" {
     ## Tray icon
     #tray_output *
     #icon_theme "Papirus-Dark"
-
-    #swaybar_command ~/bin/waybar
 #}
 
-# Application specific rules
+# Assign applications to specific workspace
 assign [app_id="io.github.quodlibet.QuodLibet"] workspace Music
 assign [app_id="pithos"] workspace Music
 assign [app_id="thunderbird"] workspace Email
-for_window [app_id="keepassx"] move scratchpad
+
+# Application specific rules
+for_window [app_id="firefox"] inhibit_idle fullscreen
+for_window [class="Chromium"] inhibit_idle fullscreen
 
 # Execs
 exec {
@@ -290,7 +291,6 @@ exec_always {
     gsettings set $gnome-schema font-name 'Inconsolata 10'
     gsettings set $gnome-schema monospace-font-name 'Inconsolata 10'
     gsettings set $gnome-schema document-font-name 'Inconsolata 10'
-    swaymsg 'splitv'
 }
 
 include /etc/sway/config.d/*
