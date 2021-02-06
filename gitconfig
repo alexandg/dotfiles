@@ -1,6 +1,6 @@
 [alias]
-    lg = log --oneline --abbrev-commit --all --graph --decorate --color --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
-[user]  
+    lg = log --oneline --abbrev-commit --all --graph --decorate --color --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(blue)<%an>%Creset'
+[user]
 	name = Geoffrey Alexander
 	useConfigOnly = true
 [core]
@@ -12,3 +12,5 @@
     interactive = auto
     ui = true
     pager = true
+[pull]
+    ff = only

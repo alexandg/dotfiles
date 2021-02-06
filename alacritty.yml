@@ -32,8 +32,9 @@ font:
 # Colors
 colors:
   primary:
-    background: '0x121619'
-    foreground: '0xc1c7cd'
+    # IBM Gray 90
+    background: '0x21272a'
+    foreground: '0xf2f4f8'
 
   # Cursor colors
   #cursor:
@@ -50,58 +51,26 @@ colors:
     text: CellBackground
     background: CellForeground
 
-  # Search colors
-  #search:
-    #matches:
-      #foreground: '#000000'
-      #background: '#ffffff'
-
-    #bar:
-      #background: '#c5c8c6'
-      #foreground: '#1d1f21'
-
-  # Normal colors
-  #normal:
-    #black:   '0x121619'
-    #red:     '0xee6677'
-    #green:   '0x228833'
-    #yellow:  '0xccbb44'
-    #blue:    '0x4477aa'
-    #magenta: '0xaa3377'
-    #cyan:    '0x66ccee'
-    #white:   '0xa2a9b0'
-
-  # Bright colors
-  #bright:
-    #black:   '0x697077'
-    #red:     '0xcc3311'
-    #green:   '0x009988'
-    #yellow:  '0xee7733'
-    #blue:    '0x0077bb'
-    #magenta: '0xee3377'
-    #cyan:    '0x33bbee'
-    #white:   '0xf2f4f8'
-
   normal:
-    black:   '0x121619'
-    red:     '0xd55e00'
-    green:   '0x009e73'
-    yellow:  '0xf0e442'
-    blue:    '0x0072b2'
-    magenta: '0xcc79a7'
-    cyan:    '0x56b4e9'
-    white:   '0xa2a9b0'
+    black:   '0x21272a'
+    red:     '0xfa4d56'
+    green:   '0x24a148'
+    yellow:  '0xccbb44'
+    blue:    '0x4589ff'
+    magenta: '0xee5396'
+    cyan:    '0x009d9a'
+    white:   '0xf2f4f8'
 
   # Bright colors
   bright:
     black:   '0x697077'
-    red:     '0xee6677'
-    green:   '0x228833'
-    yellow:  '0xccbb44'
-    blue:    '0x4477aa'
-    magenta: '0xaa3377'
-    cyan:    '0x66ccee'
-    white:   '0xf2f4f8'
+    red:     '0xff8389'
+    green:   '0x42be65'
+    yellow:  '0xddcc77'
+    blue:    '0x78a9ff'
+    magenta: '0xff7eb6'
+    cyan:    '0x08bdba'
+    white:   '0xdde1e6'
 
   # Dim colors
   #
