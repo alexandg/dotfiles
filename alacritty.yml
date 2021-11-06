@@ -8,33 +8,55 @@ window:
 font:
   # Normal (roman) font face
   normal:
-    family: Inconsolata
-    style: Regular
+    family: Iosevka Fixed
+    style: Medium Extended
 
   # Bold font face
   bold:
-    family: Inconsolata
-    style: Bold
+    family: Iosevka Fixed
+    style: Heavy Extended
 
   # Italic font face
   italic:
-    family: Inconsolata
-    style: Italic
+    family: Iosevka Fixed
+    style: Italic Extended
 
   # Bold italic font face
   bold_italic:
-    family: Inconsolata
-    style: Bold Italic
+    family: Iosevka Fixed
+    style: Heavy Italic Extended
 
   # Point size
-  size: 10.0
+  size: 11.0
+
+draw_bold_text_with_bright_colors: false
 
 # Colors
 colors:
+  # pale night
   primary:
-    # IBM Gray 90
-    background: '0x21272a'
-    foreground: '0xf2f4f8'
+    background: '0x292d3e' ## black
+    foreground: '0xbfc7d5' ## white
+
+  normal:
+    black:   '0x292d3e' ## black
+    red:     '0xff5370' ## 4.37 red
+    green:   '0xc3e88d' ## 9.91 green
+    yellow:  '0xffcb6b' ## 9.10 yellow
+    blue:    '0x82b1ff' ## 6.29 blue
+    magenta: '0xc792ea' ## 5.67 purple
+    cyan:    '0x89ddff' ## 9.00 cyan
+    white:   '0xbfc7d5' ## 8.02 white
+
+  bright:
+    black:   '0x3e4452' ## visual-grey
+    red:     '0xbe5046' ## 2.88 ## dark-red
+    green:   '0xc3e88d' ## green
+    yellow:  '0xf78c6c' ## 5.80 dark-yellow
+    blue:    '0x82b1ff' ## blue
+    magenta: '0xc792ea' ## purple
+    cyan:    '0x89ddff' ## cyan
+    white:   '0xbfc7d5' ## 4.86 white
 
   # Cursor colors
   #cursor:
@@ -42,35 +64,14 @@ colors:
     #cursor: CellForeground
 
   # Vi mode cursor colors
-  vi_mode_cursor:
-    text: CellBackground
-    cursor: CellForeground
+  #vi_mode_cursor:
+    #text: CellBackground
+    #cursor: CellForeground
 
   # Selection colors
-  selection:
-    text: CellBackground
-    background: CellForeground
-
-  normal:
-    black:   '0x21272a'
-    red:     '0xfa4d56'
-    green:   '0x24a148'
-    yellow:  '0xccbb44'
-    blue:    '0x4589ff'
-    magenta: '0xee5396'
-    cyan:    '0x009d9a'
-    white:   '0xf2f4f8'
-
-  # Bright colors
-  bright:
-    black:   '0x697077'
-    red:     '0xff8389'
-    green:   '0x42be65'
-    yellow:  '0xddcc77'
-    blue:    '0x78a9ff'
-    magenta: '0xff7eb6'
-    cyan:    '0x08bdba'
-    white:   '0xdde1e6'
+  #selection:
+    #text: CellBackground
+    #background: CellForeground
 
   # Dim colors
   #
@@ -129,10 +130,14 @@ live_config_reload: true
 
 # Shell
 shell:
-  program: /usr/bin/zsh
+  program: /usr/bin/fish
+  #program: /usr/bin/zsh
   #args:
     #- -c
     #- tmux
+
+#env:
+  #TERM: xterm-256color
 
 #debug:
   # Display the time it takes to redraw each frame.
