@@ -1,8 +1,32 @@
 function setup_lspconfig()
-    require('lspconfig').clangd.setup{}
-    require('lspconfig').gopls.setup{}
-    require('lspconfig').pylsp.setup{}
-    require('lspconfig').rls.setup{}
+    local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+
+    local on_attach = function(client)
+        require("completion").on_attach(client)
+    end
+
+    require('lspconfig').clangd.setup{ capabilities = capabilities }
+    require('lspconfig').gopls.setup{ capabilities = capabilities }
+    require('lspconfig').pylsp.setup{ capabilities = capabilities }
+    require('lspconfig').rls.setup{ capabilities = capabilities }
+    require('lspconfig').rust_analyzer.setup({
+        capabilities = capabilities,
+        on_attach = on_attach,
+        settings = {
+            ["rust-analyzer"] = {
+                assist = {
+                    importGranularity = "module",
+                    importPrefix = "by_self",
+                },
+                cargo = {
+                    loadOutDirsFromCheck = true
+                },
+                procMacro = {
+                    enable = true
+                },
+            },
+        },
+    })
 end
 
 function setup_treesitter()
@@ -148,12 +172,70 @@ function setup_ale()
     vim.g.ale_rust_cargo_use_check = 1
 end
 
+function setup_doge()
+    vim.g.doge_doc_standard_python = 'google'
+end
+
+function setup_vsnip()
+end
+
+function setup_nvim_cmp()
+    local has_words_before = function()
+        local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+        return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+    end
+
+    local feedkey = function(key, mode)
+        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
+    end
+
+	local cmp = require('cmp')
+    cmp.setup {
+        snippet = {
+            expand = function(args)
+                vim.fn["vsnip#anonymous"](args.body)
+            end,
+        },
+        mapping = {
+            ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
+            ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
+            ['<C-y>'] = cmp.config.disable,
+            ['<C-e>'] = cmp.mapping({
+                i = cmp.mapping.abort(),
+                c = cmp.mapping.close(),
+            }),
+            ['<CR>'] = cmp.mapping.confirm({ select = true }),
+            ['<Tab>'] = cmp.mapping(function(fallback)
+                if cmp.visible() then
+                    cmp.select_next_item()
+                elseif vim.fn["vsnip#available"](1) == 1 then
+                    feedkey("<Plug>(vsnip-expand-or-jump)", "")
+                elseif has_words_before() then
+                    cmp.complete()
+                else
+                    fallback()
+                end
+            end, { 'i', 's' }),
+            ['<S-Tab>'] = cmp.mapping(function()
+                if cmp.visible() then
+                    cmp.select_prev_item()
+                elseif vim.fn["vim#jumpable"](-1) == 1 then
+                    feedkey("<Plug>(vsnip-jump-prev)", "")
+                end
+            end, { 'i', 's' }),
+        },
+        sources = cmp.config.sources({
+            { name = 'vsnip' },
+            { name = 'nvim_lsp', max_item_count = 20 },
+            { name = 'path' },
+            { name = 'buffer' },
+        })
+	}
+end
+
 return require('packer').startup(function()
     -- Packer managing itself
     use { 'wbthomason/packer.nvim' }
-
-    -- mucomplete
-    use { 'lifepillar/vim-mucomplete' }
 
     -- Fugitive
     use { 'tpope/vim-fugitive' }
@@ -164,6 +246,12 @@ return require('packer').startup(function()
     -- nvim-lspconfig
     use { 'neovim/nvim-lspconfig', config = setup_lspconfig, }
 
+    -- nvim-cmp
+	use { 'hrsh7th/cmp-nvim-lsp' }
+	use { 'hrsh7th/cmp-buffer' }
+	use { 'hrsh7th/cmp-path' }
+	use { 'hrsh7th/nvim-cmp', config = setup_nvim_cmp, }
+
     -- Treesitter
     use { 'nvim-treesitter/nvim-treesitter', config = setup_treesitter,  }
 
@@ -171,7 +259,7 @@ return require('packer').startup(function()
     use { 'drewtempelmeyer/palenight.vim' }
 
     -- lspsaga
-    use { 'tami5/lspsaga.nvim', branch = 'nvim51', config = setup_lspsaga }
+    use { 'tami5/lspsaga.nvim', branch = 'nvim6.0', config = setup_lspsaga }
 
     -- polyglot
     use { 'sheerun/vim-polyglot' }
@@ -194,4 +282,16 @@ return require('packer').startup(function()
     -- ALE
     use { 'dense-analysis/ale', config = setup_ale }
 
+    -- DoGe
+    use { 'kkoomen/vim-doge', config = setup_doge }
+
+    -- Snippets
+    use { 'hrsh7th/cmp-vsnip' }
+    use {
+        'hrsh7th/vim-vsnip' ,
+        requires = {
+            { "hrsh7th/vim-vsnip-integ", after = "vim-vsnip" },
+            { 'rafamadriz/friendly-snippets', after = "vim-vsnip" },
+        }
+    }
 end)

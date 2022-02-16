@@ -82,9 +82,10 @@ nnoremap <leader>rtw :%s/\s\+$//e<CR>
 " Plugin Configs
 
 " mucomplete
-set completeopt+=menuone
-set shortmess+=c
-set belloff+=ctrlg
+" nvim-cmp
+set completeopt+=menu,menuone,noselect
+" set shortmess+=c
+" set belloff+=ctrlg
 
 " ALE
 let g:ale_fixers = {
